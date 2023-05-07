@@ -30,7 +30,7 @@ export default class CRUD {
             Headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         }
-        const res = await axios.patch(process.env.BAES_URL + `player-scores/${id}`, resOptions)
+        const res = await axios.patch(process.env.BAES_URL + `update-scores/${id}`, resOptions)
             .catch((error) => {
                 console.log('something wrong happaned :', error)
             })
@@ -46,7 +46,7 @@ export default class CRUD {
             Headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         }
-        const res = await axios.post(process.env.BAES_URL + `player-scores/`, resOptions)
+        const res = await axios.post(process.env.BAES_URL + `create-scores/`, resOptions)
             .catch((error) => {
                 console.log('something wrong happaned :', error)
             })
@@ -57,7 +57,7 @@ export default class CRUD {
     }
 
     delete = async (id) => {
-        const res = await axios.patch(process.env.BAES_URL + `player-scores/${id}`, { method : 'DELETE'})
+        const res = await axios.patch(process.env.BAES_URL + `delete-score/${id}`, { method : 'DELETE'})
         .catch((error) => {
             console.log('something wrong happaned :', error)
         })
