@@ -34,7 +34,7 @@ main{
     left: 0;
     top:0;
   }
-  div.result.green{
+  div.result.blue{
     background-color: rgb(27, 13, 214);
   }
   div.result.red{

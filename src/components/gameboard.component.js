@@ -36,18 +36,12 @@ const Gameboard = () => {
         const computerWon = linesThatAre('o', 'o', 'o').length > 0;
         if (playerWon) {
             setWinner('x');
-            if (winner != null) {
+            if (winner !== null) {
                 setUid(uid + 1)
                 setPlayerScore(current => [...current, {
                     id: uid,
                     value: 'win',
                     player: 'Tyson'
-                }
-                ])
-                setPlayerScore(current => [...current, {
-                    id: uid,
-                    value: 'loss',
-                    player: 'AI'
                 }
                 ])
             }
@@ -59,12 +53,6 @@ const Gameboard = () => {
                 id: uid,
                 value: 'win',
                 player: 'AI'
-            }
-            ])
-            setPlayerScore(current => [...current, {
-                id: uid,
-                value: 'loss',
-                player: 'Tyson'
             }
             ])
         }
@@ -138,7 +126,7 @@ const Gameboard = () => {
             </div>
 
             {!!winner && winner === 'x' && (
-                <div className="result green">
+                <div className="result blue">
                     You WON!
                 </div>
             )}
