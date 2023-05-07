@@ -35,7 +35,7 @@ export default class CRUD {
                 console.log('something wrong happaned :', error)
             })
         if (res) {
-            return res.data
+            return true
         }
         return false
     }
@@ -51,7 +51,7 @@ export default class CRUD {
                 console.log('something wrong happaned :', error)
             })
         if (res) {
-            return res.data
+            return true
         }
         return false
     }
@@ -62,7 +62,7 @@ export default class CRUD {
             console.log('something wrong happaned :', error)
         })
     if (res) {
-        return res.data
+        return true
     }
     return false
     }
