@@ -1,0 +1,42 @@
+main{
+    background-color: rgb(87, 246, 209);
+    width:min-content;
+    padding: 2rem;
+    gap:2rem;
+    display: flex;
+    margin:5rem auto;
+  }
+  div.board{
+    display: grid;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    text-align: center;
+  }
+  div.square{
+    box-sizing: border-box;
+    text-align: center;
+    background-color: transparent;
+    width: 100px;
+    height: 90px;
+    border: 2px rgba(59, 130, 102, 0.566) solid;
+    border-radius: 15px;
+    font-size: 5rem;
+    font-weight: bolder;
+    color: #555555;
+    line-height: 0.9;
+    padding-bottom: 10px;
+  }
+  div.result{
+    font-size: 1.5rem;
+    padding: 7px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top:0;
+  }
+  div.result.green{
+    background-color: rgb(27, 13, 214);
+  }
+  div.result.red{
+    background-color: rgb(241, 14, 14);
+  }
