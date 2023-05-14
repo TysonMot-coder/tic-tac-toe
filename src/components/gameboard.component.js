@@ -3,6 +3,7 @@ import GameSquares from './game.squares.component'
 import Scoreboard from './scoreboard.coponent';
 import GameMode from '../functions/game.mode';
 import { useState, useEffect } from 'react';
+import PlayerScoreService from '../services/player.score.service'
 
 const defaultSquares = () => (new Array(9)).fill(null);
 
@@ -19,6 +20,7 @@ const Gameboard = () => {
     const [winner, setWinner] = useState(null);
     const [playerScore, setPlayerScore] = useState([])
     const [uid, setUid] = useState(0)
+    let currentScores = []
 
 
     useEffect(() => {
@@ -40,10 +42,11 @@ const Gameboard = () => {
                 setUid(uid + 1)
                 setPlayerScore(current => [...current, {
                     id: uid,
-                    value: 'win',
-                    player: 'Tyson'
+                    name: 'Tyson',
+                    score: 'win'
                 }
                 ])
+                 postScores(playerScore)
             }
         }
         if (computerWon) {
@@ -51,10 +54,12 @@ const Gameboard = () => {
             setUid(uid + 1)
             setPlayerScore(current => [...current, {
                 id: uid,
-                value: 'win',
-                player: 'AI'
+                name: 'AI',
+                score: 'win'
             }
+           
             ])
+            postScores(playerScore)
         }
 
         const putComputerAt = index => {
@@ -103,11 +108,35 @@ const Gameboard = () => {
             setUid(uid + 1)
             setPlayerScore(current => [...current, {
                 id: uid,
-                value: 'draw',
-                player: 'AI/Tyson'
+                name: 'draw',
+                score: 'AI/Tyson'
             }
             ])
         }
+    }
+
+    useEffect(() => {
+        const getPreviousScores = async () => {
+           await PlayerScoreService.get().then((res) => {
+                return res
+            }).then(data => {
+                currentScores.push(data)
+            })
+            setTimeout(() => {
+                let data = []
+                for (let i = 0; i < currentScores.length; i++) {
+                    for (let item of currentScores) {
+                        data.push(item[i])
+                    }
+                }
+                setPlayerScore([...data])
+            }, 1000)
+        }
+        getPreviousScores()
+    }, [])
+
+    const postScores = async (data) => {
+        await PlayerScoreService.create(data).catch(err => console.log(err))
     }
 
     return (

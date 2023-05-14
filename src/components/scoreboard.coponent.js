@@ -12,8 +12,8 @@ const Scoreboard = (score) => {
                 {
                     score.score.map((items) => 
                         <tr key={items.id}>
-                            <td>{items.player}</td>
-                            <td>{items.value}</td>
+                            <td>{items.name}</td>
+                            <td>{items.score}</td>
                         </tr>
                     )
                 }

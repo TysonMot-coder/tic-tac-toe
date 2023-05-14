@@ -1,20 +1,22 @@
 import axios from 'axios';
 
-export default class CRUD {
+class PlayerScoreService {
+
+    BASE_URL = process.env.REACT_APP_BASE_URL
 
     get = async () => {
-        const res = await axios.get(process.env.BASE_URL + 'player-scores/')
+        const { data } = await axios.get(`${this.BASE_URL}player-scores/`)
             .catch((error) => {
                 console.log('something wrong happaned :', error)
             })
-        if (res) {
-            return res.data
+        if (data) {
+            return data.data
         }
         return false
     }
 
     getById = async (id) => {
-        const res = await axios.get(process.env.BASE_URL + `player-scores/${id}`)
+        const res = await axios.get(`${this.BASE_URL}player-scores/${id}`)
             .catch((error) => {
                 console.log('something wrong happaned :', error)
             })
@@ -30,7 +32,7 @@ export default class CRUD {
             Headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         }
-        const res = await axios.patch(process.env.BASE_URL + `update-scores/${id}`, resOptions)
+        const res = await axios.patch(`${this.BASE_URL}update-scores/${id}`, resOptions)
             .catch((error) => {
                 console.log('something wrong happaned :', error)
             })
@@ -42,11 +44,11 @@ export default class CRUD {
 
     create = async (data) => {
         const resOptions = {
-            method: 'PUT',
+            method: 'POST',
             Headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         }
-        const res = await axios.post(process.env.BASE_URL + `create-scores/`, resOptions)
+        const res = await axios.post(`${this.BASE_URL}create-scores/`, resOptions)
             .catch((error) => {
                 console.log('something wrong happaned :', error)
             })
@@ -57,14 +59,16 @@ export default class CRUD {
     }
 
     delete = async (id) => {
-        const res = await axios.patch(process.env.BASE_URL + `delete-score/${id}`, { method : 'DELETE'})
-        .catch((error) => {
-            console.log('something wrong happaned :', error)
-        })
-    if (res) {
-        return true
-    }
-    return false
+        const res = await axios.patch(`${this.BASE_URL}delete-score/${id}`, { method: 'DELETE' })
+            .catch((error) => {
+                console.log('something wrong happaned :', error)
+            })
+        if (res) {
+            return true
+        }
+        return false
     }
 
 }
+
+export default new PlayerScoreService
